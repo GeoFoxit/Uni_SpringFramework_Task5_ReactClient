@@ -1,8 +1,120 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap');
+
+html, body, #root, #app {
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  font-family: 'Assistant', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  /* outline: 1px rgba(192, 192, 192, 0.466) dotted; */
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.mainContent {
+  flex-grow: 1;
+  color: #7c697a;
+}
+
+.header, .footer {
+  background-color: #5e0551;
+  color: white;
+  min-height: 4rem;
+}
+
+/* HEADER */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-items: stretch;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem;
+}
+
+.header > div > div {
+  min-width: 55pt;
+  padding: 5pt;
+}
+
+.header img {
+  max-width: 35pt;
+}
+
+/* FOOTER */
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.footer > div > span:nth-child(3) {
+  color: rgba(255, 255, 255, 0.671);
+}
+
+/* CONTENT */
+
+.mainContent {
+  display: flex;
+}
+
+/* Sign */
+
+.sign {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+}
+
+.sign > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 2rem;
+}
+
+.sign > div > h2 {
+  border-bottom: 5pt solid #7e737d;
+}
+
+.sign > div > input {
+  padding: 0.7rem 0.7rem;
+  margin: 1rem;
+}
+
+.sign > div > button {
+  color: white;
+  background-color: #5e0551;
+  border: 0;
+  padding: 0.7rem;
+  margin: 1rem;
+}
+
+@media (max-width: 685px) {
+  .sign {
+    flex-direction: column;
+  }
+  .sign > hr {
+    display: none;
+  }
+  .sign > div:nth-child(1) {
+    border-bottom: .15rem dotted #5e0551;
+  }
 }
