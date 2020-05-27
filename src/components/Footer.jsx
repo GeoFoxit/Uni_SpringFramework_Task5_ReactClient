@@ -4,9 +4,9 @@ class Footer extends Component {
     render() {
         return (
             <div className="footer">
-                <div>
+                <div className="credits">
                     <span>© 2020 Borodin George</span><br/>
-                    <span>E-sportshop</span>
+                    <span className="light">E-sportshop</span>
                 </div>
             </div>
         );
