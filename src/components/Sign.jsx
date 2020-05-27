@@ -1,25 +1,47 @@
 import React, { Component } from 'react';
 
 class Sign extends Component {
+
+
+    sign_in_handler = () => {
+        this.props.sign.sign_in(this.sign_in_email.value, this.sign_in_pass.value)
+        .then(isOk => {
+            if (!isOk) {
+                alert("Invalid email or password!")
+            }
+        })
+    }
+
+    sign_up_handler = () => {
+        if (this.sign_up_pass.value !== this.sign_up_rep_pass.value) {
+            alert("Fields 'password' and 'repeat password' are not equal!");
+            return;
+        }
+        this.props.sign.sign_up(this.sign_up_name.value, this.sign_up_email.value, this.sign_up_pass.value)
+    }
+
     render() {
-        const {sign_in, sign_out, sign_up} = this.props.sign;
 
         return (
-            <div className="sign">
-                <div>
+            <div className="content_container sign">
+                <div className="sign_in">
                     <h2>Sign In</h2>
-                    <input type="email" name="" id="" placeholder="E-mail"/>
-                    <input type="password" name="" id="" placeholder="Password"/>
-                    <button onClick={sign_in}>Submit</button>
+                    <div className="sign_form">
+                        <input type="email" ref={(node) => this.sign_in_email = node} placeholder="E-mail"/>
+                        <input type="password" ref={(node) => this.sign_in_pass = node} placeholder="Password"/>
+                        <button onClick={this.sign_in_handler}>Submit</button>
+                    </div>
                 </div>
                 <hr/>
-                <div>
+                <div className="sign_up">
                     <h2>Sign Up</h2>
-                    <input type="text" name="" id="" placeholder="Name"/>
-                    <input type="email" name="" id="" placeholder="E-mail"/>
-                    <input type="password" name="" id="" placeholder="Password"/>
-                    <input type="password" name="" id="" placeholder="Repeat password"/>
-                    <button onClick={sign_up}>Submit</button>
+                    <div className="sign_form">
+                        <input type="text" ref={(node) => this.sign_up_name = node} placeholder="Name"/>
+                        <input type="email" ref={(node) => this.sign_up_email = node} placeholder="E-mail"/>
+                        <input type="password" ref={(node) => this.sign_up_pass = node} placeholder="Password"/>
+                        <input type="password" ref={(node) => this.sign_up_rep_pass = node} placeholder="Repeat password"/>
+                        <button onClick={this.sign_up_handler}>Submit</button>
+                    </div>
                 </div>
             </div>
         );
