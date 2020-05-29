@@ -126,19 +126,31 @@ $second_color: #7c697a;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      button, span {
-        margin: 0.5rem 0;
+      width: 40%;
+      .profile_details {
+        display: flex;
+        flex-direction: column;
+        button, span {
+          margin: 0.5rem 0;
+        }
+        button {
+          border: 2pt solid $color_main;
+          border-radius: 0.5rem;
+          padding: 0.5rem 0;
+          color: $color_main;
+          background-color: white;
+          cursor: pointer;
+          &:hover {
+            background-color: $color_main;
+            color: white;
+          }
+        }
       }
-      button {
-        border: 2pt solid $color_main;
-        border-radius: 0.5rem;
-        padding: 0.5rem 0;
-        color: $color_main;
-        background-color: white;
-        cursor: pointer;
-        &:hover {
-          background-color: $color_main;
-          color: white;
+      .profile_userPurchases {
+        text-align: center;
+        width: 100%;
+        table {
+          width: 100%;
         }
       }
     }
@@ -154,6 +166,15 @@ $second_color: #7c697a;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        .searchByRate {
+          display: flex;
+          flex-direction: column;
+        }
+        .priceFilter {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
       }
       .goods {
         display: flex;
@@ -174,7 +195,39 @@ $second_color: #7c697a;
         }
       }
     }
+    .good_details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      max-width: 65%;
+      .details_preview {
+        text-align: center;
+        max-width: 70%;
+        img {
+          margin: 1rem;
+          padding: 1rem;
+          border: 1px solid $color_main;
+          max-width: 100%;
+        }
+      }
+      .details_details {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 10%;
+        width: 100%;
+      }
+    }
 
   }
 
+}
+
+blockquote {
+  background-color: rgba(0, 0, 0, 0.062);
+  border: 1px solid black;
+  padding: 0.5rem;
+  border-bottom-left-radius: 10pt;
+  border-bottom-right-radius: 10pt;
+  border-top-right-radius: 10pt;
 }
