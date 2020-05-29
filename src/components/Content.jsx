@@ -6,7 +6,8 @@ import Compare from './Compare';
 import Cart from './Cart';
 import Favorite from './Favorite';
 import Profile from './Profile';
-import Catalogue from './Catalogue'
+import Catalogue from './Catalogue';
+import GoodDetails from './GoodDetails';
 
 class Content extends Component {
 
@@ -19,6 +20,7 @@ class Content extends Component {
                 <Route exact path="/compare" component={Compare}/>
                 <Route exact path="/cart" component={Cart}/>
                 <Route exact path="/favorite" component={Favorite}/>
+                <Route exact path="/details/:good_id" component={GoodDetails} />
                 <Route exact path="/profile" render={component}/>
             </div>
         );
