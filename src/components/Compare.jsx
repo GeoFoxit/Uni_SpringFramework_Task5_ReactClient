@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Compare extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            goodsToCompare: []
-        }
+    state = {
+        goodsToCompare: []
     }
 
     componentDidMount() {
         const compareInStorage = localStorage.getItem("compare")
         
-        if (compareInStorage === null) {
+        if (compareInStorage === null || compareInStorage === "") {
             localStorage.setItem("compare", JSON.stringify([]))
             return;
         }
@@ -22,7 +18,7 @@ class Compare extends Component {
         
         let result = []
         for (let i = 0; i < goodList.length; i++) {
-            axios.get(`http://192.168.1.103:8003/${goodList[i]}`)
+            axios.get(`http://192.168.1.103:8000/good/${goodList[i]}`)
             .then(res => {
                 result.push(res.data)
             })
@@ -53,7 +49,7 @@ class Compare extends Component {
     }
 
     addToCart = (good) => {
-        if (localStorage.getItem("cart") === null) {
+        if (localStorage.getItem("cart") === null || localStorage.getItem("cart") === "") {
             localStorage.setItem("cart", JSON.stringify([]))
         }
 

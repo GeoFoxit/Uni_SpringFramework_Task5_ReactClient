@@ -7,7 +7,7 @@ import compare_img from '../img/compare.png';
 import {Link} from 'react-router-dom';
 
 
-const Header = () => (
+const Header = (props) => (
     <div className="header">
         <div className="logo">
             <Link exact="exact" to="/">
@@ -42,7 +42,7 @@ const Header = () => (
             <Link excit="excit" to="/profile">
                 <div className="nav-button">
                     <img src={profile_img} alt=""/><br/>
-                    <span>Profile</span><br/>
+                    <span>{props.user.name}</span><br/>
                 </div>
             </Link>
         </div>

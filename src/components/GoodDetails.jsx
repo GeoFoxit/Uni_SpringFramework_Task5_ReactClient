@@ -4,28 +4,25 @@ import good_img from '../img/nf.png'
 import Comments from './Comments'
 
 class GoodDetails extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            good: null
-        }
+    state = {
+        good: null
     }
     
     componentDidMount() {
-        axios.get(`http://192.168.1.103:8003/${this.props.match.params.good_id}`)
+        axios.get(`http://192.168.1.103:8000/good/${this.props.match.params.good_id}`)
         .then(res => {
             this.setState({
                 good: res.data
             })
         })
         .catch(res => {
+            alert("Sorry, error loading good details.")
             console.log(res);
         })
     }
 
     addToCart = (id) => {
-        if (localStorage.getItem("cart") === null) {
+        if (localStorage.getItem("cart") === null || localStorage.getItem("cart") === "") {
             localStorage.setItem("cart", JSON.stringify([]))
         }
 
@@ -39,7 +36,7 @@ class GoodDetails extends Component {
     }
 
     addToCompare = (id) => {
-        if (localStorage.getItem("compare") === null) {
+        if (localStorage.getItem("compare") === null || localStorage.getItem("cart") === "") {
             localStorage.setItem("compare", JSON.stringify([]))
         }
 

@@ -12,7 +12,7 @@ import GoodDetails from './GoodDetails';
 class Content extends Component {
 
     render() {
-        let component = !this.props.logged ? (()=><Sign sign={this.props.sign}/>) : (()=>(<Profile sign={this.props.sign}/>))
+        let component = !this.props.user ? (()=><Sign sign={this.props.sign}/>) : (()=>(<Profile user={this.props.user} sign={this.props.sign}/>))
         return (
             <div className="mainContent">
                 <Route exact path="/" component={Catalogue}/>

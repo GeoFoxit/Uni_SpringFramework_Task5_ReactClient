@@ -3,23 +3,15 @@ import axios from 'axios';
 import {Link} from 'react-router-dom'
 
 class Cart extends Component {
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            goodsInCart: []
-        }
+    state = {
+        goodsInCart: []
     }
 
     componentDidMount() {
-        if (localStorage.getItem("user") === null) {
-            this.purchaseButton.disabled = true;
-        }
-
-
+        
         const cartInStorage = localStorage.getItem("cart")
         
-        if (cartInStorage === null) {
+        if (cartInStorage === null || cartInStorage === "") {
             localStorage.setItem("cart", JSON.stringify([]))
             return;
         }
@@ -28,7 +20,7 @@ class Cart extends Component {
         
         let result = []
         for (let i = 0; i < goodList.length; i++) {
-            axios.get(`http://192.168.1.103:8003/${goodList[i]}`)
+            axios.get(`http://192.168.1.103:8000/good/${goodList[i]}`)
             .then(res => {
                 result.push(res.data)
             })
@@ -36,7 +28,7 @@ class Cart extends Component {
                 this.setState({goodsInCart: result})
             })
             .catch(res => {
-                console.log("Error!");
+                alert("Sorry, error loading cart.")
                 console.log(res);
                 this.setState({goodsInCart: []})
                 return;
@@ -48,13 +40,29 @@ class Cart extends Component {
         const priceList = this.state.goodsInCart.map(good => parseFloat(good.price))
         const sum = priceList.reduce((sum, curVal) => sum + curVal)
 
+        if (localStorage.getItem("user") === "" || localStorage.getItem("user") === null) {
+            alert("You must be logged!")
+            return;
+        }
+
         const data = {
             user_id: JSON.parse(localStorage.getItem("user")).id,
             sum,
             goods_ids: localStorage.getItem("cart")
         }
 
-        axios.post("http://127.0.0.1:8002/", data)
+        const token = localStorage.getItem("token");
+
+        if (token === null || token === "") {
+            alert("You must be logged!")
+            return;
+        }
+
+        axios.post("http://192.168.1.103:8000/purchase", data, {
+            headers: {
+                Authorization: "Bearer " + token
+            }
+        })
         .then(response => {
             console.log(response.data);
             alert("Successfully purchased!")

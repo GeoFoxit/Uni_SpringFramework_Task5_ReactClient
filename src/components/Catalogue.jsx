@@ -5,26 +5,24 @@ import nf_png from '../img/nf.png'
 import {Link} from 'react-router-dom'
 
 class Catalogue extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            goods: [],
-            searchedGoods: [],
-            filteredByRateGoods: [],
-            filteredByPriceGoods: [],
-            filteredByCountryGoods: [],
-            foundedGoods: []
-        }
+    state = {
+        goods: [],
+        searchedGoods: [],
+        filteredByRateGoods: [],
+        filteredByPriceGoods: [],
+        filteredByCountryGoods: [],
+        foundedGoods: []
     }
 
     componentDidMount() {
-        axios.get('http://192.168.1.103:8003/')
+        axios.get('http://192.168.1.103:8000/good')
         .then(data => {
             this.setState({
                 goods: data.data 
             })
         })
         .catch(error => {
+            alert("Sorry, error loading catalogue.")
             console.log(error);
         })
     }

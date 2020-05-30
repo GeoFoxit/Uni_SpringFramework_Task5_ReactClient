@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class Comments extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            commentsList: []
-        }
+    state = {
+        commentsList: []
     }
     
     componentDidMount() {
-        axios.get(`http://localhost:8001/`)
+        axios.get('http://192.168.1.103:8000/comment')
         .then(data => data.data)
         .then(allCommentsArray => (allCommentsArray.filter(comment => parseInt(comment.good_id) === parseInt(this.props.good))))
         .then(arr => {
@@ -19,20 +16,31 @@ class Comments extends Component {
             })
         })
         .catch(err => {
+            alert("Sorry, error loading comments.")
             console.log(err);
         })
     }
 
     sendComment = () => {
-        let user = JSON.parse(localStorage.getItem("user"))
+        let useR = localStorage.getItem("user")
+        let token = localStorage.getItem("token")
+        if (useR === null || useR === "" || token === null || token === "") {
+            alert("You must be logged to send comments!")
+            return;
+        }
+        let user = JSON.parse(useR)
         if (this.inputComment.value === "") {
             alert("Fill the field!")
             return;
         }
-        axios.post('http://192.168.1.103:8001/',{
+        axios.post('http://192.168.1.103:8000/comment',{
             user_id: user.id,
             good_id: this.props.good,
             content: this.inputComment.value
+        },{
+            headers: {
+                Authorization: "Bearer " + token
+            }
         })
         .then(response => {
             console.log(response);
