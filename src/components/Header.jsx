@@ -1,8 +1,6 @@
 import React from 'react';
-import contacts_img from '../img/phone.png';
 import profile_img from '../img/profile.png';
 import cart_img from '../img/cart.png';
-import like_img from '../img/like.png';
 import compare_img from '../img/compare.png';
 import {Link} from 'react-router-dom';
 
@@ -15,12 +13,6 @@ const Header = (props) => (
             </Link>
         </div>
         <div className="nav">
-            <Link exact="exact" to="/contacts">
-                <div className="nav-button">
-                    <img src={contacts_img} alt=""/><br/>
-                    <span>Contacts</span><br/>
-                </div>
-            </Link>
             <Link exact="exact" to="/compare">
                 <div className="nav-button">
                     <img src={compare_img} alt=""/><br/>
@@ -31,12 +23,6 @@ const Header = (props) => (
                 <div className="nav-button">
                     <img src={cart_img} alt=""/><br/>
                     <span>Cart</span><br/>
-                </div>
-            </Link>
-            <Link exact="exact" to="/favorite">
-                <div className="nav-button">
-                    <img src={like_img} alt=""/><br/>
-                    <span>Favorite</span><br/>
                 </div>
             </Link>
             <Link excit="excit" to="/profile">

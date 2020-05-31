@@ -129,6 +129,15 @@ class Catalogue extends Component {
     }
 
     render() {
+        let addGood = null;
+        let user = localStorage.getItem("user")
+        if (user !== null && user !== "" && user !== undefined) {
+            user = JSON.parse(user)
+            if (user.role === "ROLE_ADMIN") {
+                addGood = <Link style={{"fontSize":"1.5rem", "color":"green"}} to={'/addgood'}>+</Link>
+            }
+        }
+
         if (this.state.goods.length !== 0) {
             let goodList = this.state.goods
             if (this.state.foundedGoods.length !== 0 ) {
@@ -164,6 +173,7 @@ class Catalogue extends Component {
                         </div>
                     </div>
                     <div className="goods">
+                        {addGood}
                         {goodList.map(good => (
                         <div key={good.id} className="good">
                             <img src={nf_png} alt=""/>
@@ -173,7 +183,6 @@ class Catalogue extends Component {
                             <Link to={"/details/"+good.id}><button>Details</button></Link>
                             <button onClick={() => this.addToCart(good.id)}>Add to cart</button>
                             <button onClick={() => this.addToCompare(good.id)}>Add to compare</button>
-                            <button>Like</button>
                         </div>
                         ))}
                     </div>
@@ -182,7 +191,7 @@ class Catalogue extends Component {
         } else {
             return (
                 <div className="catalogue">
-                    Catalogue is empty
+                    Catalogue is empty. {addGood}
                 </div>
             )
         }
